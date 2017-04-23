@@ -1,5 +1,10 @@
 //Reducer
 function creducer(currentState , action){
+
+  if (typeof currentState === 'undefined') {
+    return {count : 0}
+  }
+
   var nextState = {
     count : currentState.count
   }
@@ -21,23 +26,18 @@ function creducer(currentState , action){
       return currentState
   }
 }
-//Initial State
-var state = {
-  count : 0
-}
 
-var store = Redux.createStore(creducer,state)
+
+//Store
+var store = Redux.createStore(creducer)
 var counter = document.getElementById('counter')
-
+render()
 function render(){
-  console.log('rendering')
-  console.log(store.getState())
   state = store.getState()
   counter.innerHTML = state.count.toString()
 }
-
-
 store.subscribe(render)
+
 
 //Actions
 document.getElementById('add').addEventListener('click' , ()=> {
